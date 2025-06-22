@@ -45,11 +45,11 @@ def go(page_name):
 if st.session_state.page == "home":
     if st.button("📸 Image Text Translate"):
         go("ocr")
-    if st.button("📝 Text Translation"):
+    elif st.button("📝 Text Translation"):
         go("translate")
-    if st.button("🎤 Pronunciation Practice"):
+    elif st.button("🎤 Pronunciation Practice"):
         go("practice")
-    if st.button("🌍 Translate Website"):
+    elif st.button("🌍 Translate Website"):
         go("website")
 
 # === WEBSITE TRANSLATOR ===
