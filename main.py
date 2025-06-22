@@ -7,17 +7,17 @@ import tempfile
 import os
 import speech_recognition as sr
 import requests
-from bs4 import BeautifulSoup
 
 # ==== CONFIGURATION ====
 st.set_page_config(page_title="Nova Translate", page_icon="🌐")
+
 # ==== DISPLAY LOGO ====
 st.markdown("<h1 style='text-align: center;'>🌐 Nova Translate</h1>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center;'>Smart assistant for OCR, translation, pronunciation, and websites.</h5>", unsafe_allow_html=True)
 
 # ==== Language Setup ====
 all_langs = GoogleTranslator().get_supported_languages(as_dict=True)
-sorted_lang_names = sorted(all_langs.keys())  # 'english', 'telugu', etc.
+sorted_lang_names = sorted(all_langs.keys())
 
 # ==== Styling ====
 st.markdown("""
@@ -141,3 +141,4 @@ elif st.session_state.page == "practice":
             st.error(f"Error: {e}")
     if st.button("🔙 Back to Home"):
         go("home")
+
