@@ -39,7 +39,7 @@ if "page" not in st.session_state:
 
 def go(page_name):
     st.session_state.page = page_name
-    st.experimental_rerun()
+    # No rerun call here
 
 # === HOME PAGE ===
 if st.session_state.page == "home":
@@ -52,6 +52,7 @@ if st.session_state.page == "home":
     elif st.button("🌍 Translate Website"):
         go("website")
 
+# Other pages same logic, with buttons setting page to 'home' on back
 # === WEBSITE TRANSLATOR ===
 elif st.session_state.page == "website":
     st.title("Website Translator")
