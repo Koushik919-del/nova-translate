@@ -1,6 +1,10 @@
 import streamlit as st
 from PIL import Image
 import pytesseract
+
+# 👇 ADD THIS LINE HERE if you're on Windows
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\mailt\Downloads'
+
 from deep_translator import GoogleTranslator
 from gtts import gTTS
 import tempfile
