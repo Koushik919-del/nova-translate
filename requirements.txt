@@ -1,8 +1,7 @@
 streamlit
-pillow
 pytesseract
+Pillow
 deep-translator
-gtts
+gTTS
 SpeechRecognition
 requests
-beautifulsoup4
