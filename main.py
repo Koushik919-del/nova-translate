@@ -42,9 +42,9 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 def go(page_name):
-    st.session_state.page = page_name
-    st.experimental_rerun()  # Force rerun right after page state changes
-
+    if st.session_state.page != page_name:
+        st.session_state.page = page_name
+        st.rerun()
 # === HOME PAGE ===
 if st.session_state.page == "home":
     if st.button("📸 Image Text Translate"):
