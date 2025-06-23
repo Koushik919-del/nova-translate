@@ -2,8 +2,9 @@ import streamlit as st
 from PIL import Image
 import pytesseract
 
-# 👇 ADD THIS LINE HERE if you're on Windows
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+
 
 from deep_translator import GoogleTranslator
 from gtts import gTTS
