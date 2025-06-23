@@ -2,9 +2,8 @@ import streamlit as st
 from PIL import Image
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-
-
+# Use Linux path for Streamlit Cloud
+pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 from deep_translator import GoogleTranslator
 from gtts import gTTS
@@ -44,7 +43,6 @@ if "page" not in st.session_state:
 
 def go(page_name):
     st.session_state.page = page_name
-    # No rerun call here
 
 # === HOME PAGE ===
 if st.session_state.page == "home":
@@ -57,7 +55,6 @@ if st.session_state.page == "home":
     elif st.button("🌍 Translate Website"):
         go("website")
 
-# Other pages same logic, with buttons setting page to 'home' on back
 # === WEBSITE TRANSLATOR ===
 elif st.session_state.page == "website":
     st.title("Website Translator")
@@ -69,8 +66,8 @@ elif st.session_state.page == "website":
         if not url.startswith("http"):
             url = "http://" + url
         translated_url = f"https://translate.google.com/translate?sl=auto&tl={lang_code}&u={url}"
-        st.success("✅ Click below to view translated site:")
-        st.markdown(f"[🌍 Open Website in {selected_lang.title()}]({translated_url})", unsafe_allow_html=True)
+        st.success("\u2705 Click below to view translated site:")
+        st.markdown(f"[\ud83c\udf0d Open Website in {selected_lang.title()}]({translated_url})", unsafe_allow_html=True)
 
     if st.button("🔙 Back to Home"):
         go("home")
@@ -81,7 +78,7 @@ elif st.session_state.page == "ocr":
     uploaded_file = st.file_uploader("Upload image", type=["png", "jpg", "jpeg"])
     if uploaded_file:
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        st.image(image, caption="Uploaded Image", use_container_width=True)
         text = pytesseract.image_to_string(image)
         st.text_area("Extracted Text", text, height=150)
 
@@ -138,7 +135,7 @@ elif st.session_state.page == "practice":
                 audio_data = recognizer.record(source)
 
             user_said = recognizer.recognize_google(audio_data, language=lang_code)
-            st.write(f"🗣️ You said: `{user_said}`")
+            st.write(f"🚢 You said: `{user_said}`")
             if expected_phrase.lower().strip() in user_said.lower():
                 st.success("✅ Great job!")
             else:
