@@ -1,7 +1,7 @@
 import streamlit.components.v1 as components
 
 components.html("""
-    <meta name="google-site-verification" content="4yS5dM4B4u47bwLOxSwHp3AHWOrAbcaKQDN9HCbMB3g" />
+    <meta name="google-site-verification" content="4yS5dM4B4u47bwLOxSwHp3AHWOrAbcaKQDN9HCbMB3g"/>
 """, height=0)
 
 import streamlit as st
