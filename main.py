@@ -67,7 +67,7 @@ elif st.session_state.page == "website":
             url = "http://" + url
         translated_url = f"https://translate.google.com/translate?sl=auto&tl={lang_code}&u={url}"
         st.success("\u2705 Click below to view translated site:")
-        st.markdown(f"[\ud83c\udf0d Open Website in {selected_lang.title()}]({translated_url})", unsafe_allow_html=True)
+        st.markdown(f"[🌍 Open Website in {selected_lang.title()}]({translated_url})", unsafe_allow_html=True)
 
     if st.button("🔙 Back to Home"):
         go("home")
