@@ -48,7 +48,7 @@ st.markdown("""
         padding: 16px 22px;
         margin: 0;
         display: block;
-        font-size: 1.05rem;
+        font-size: 1.18rem;
         font-weight: 700;
         line-height: 1.2;
         white-space: normal;
@@ -79,7 +79,7 @@ st.markdown("""
         div.stButton > button {
             min-height: 64px;
             padding: 14px 18px;
-            font-size: 1rem;
+            font-size: 1.08rem;
         }
     }
     </style>
