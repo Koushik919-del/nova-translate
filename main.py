@@ -32,13 +32,55 @@ sorted_lang_names = sorted(all_langs.keys())
 # ==== Styling ====
 st.markdown("""
     <style>
+    .block-container {
+        max-width: 920px;
+        padding-top: 5rem;
+    }
+
+    h1, h5 {
+        letter-spacing: 0;
+    }
+
     div.stButton > button {
-        border-radius: 12px;
-        padding: 10px 24px;
-        font-size: 16px;
-        width: 60%;
-        margin: 10px auto;
+        width: 100%;
+        min-height: 72px;
+        border-radius: 16px;
+        padding: 16px 22px;
+        margin: 0;
         display: block;
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.2;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: normal;
+        border: 1px solid rgba(148, 163, 184, 0.32);
+        transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+
+    div.stButton > button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(56, 189, 248, 0.78);
+    }
+
+    div.stButton > button:active {
+        transform: translateY(0);
+    }
+
+    [data-testid="column"] {
+        padding: 0.4rem;
+    }
+
+    @media (max-width: 640px) {
+        .block-container {
+            padding-top: 3rem;
+        }
+
+        div.stButton > button {
+            min-height: 64px;
+            padding: 14px 18px;
+            font-size: 1rem;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -53,13 +95,25 @@ def go(page_name):
         st.rerun()
 # === HOME PAGE ===
 if st.session_state.page == "home":
-    if st.button("📸 Image Text Translate"):
+    top_left, top_right = st.columns(2)
+    bottom_left, bottom_right = st.columns(2)
+
+    with top_left:
+        image_clicked = st.button("📸 Image Text Translate", use_container_width=True)
+    with top_right:
+        text_clicked = st.button("📝 Text Translation", use_container_width=True)
+    with bottom_left:
+        practice_clicked = st.button("🎤 Pronunciation Practice", use_container_width=True)
+    with bottom_right:
+        website_clicked = st.button("🌍 Translate Website", use_container_width=True)
+
+    if image_clicked:
         go("ocr")
-    elif st.button("📝 Text Translation"):
+    elif text_clicked:
         go("translate")
-    elif st.button("🎤 Pronunciation Practice"):
+    elif practice_clicked:
         go("practice")
-    elif st.button("🌍 Translate Website"):
+    elif website_clicked:
         go("website")
 
 # === WEBSITE TRANSLATOR ===
