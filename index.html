@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09111f">
+<meta name="google-site-verification" content="4yS5dM4B4u47bwLOxSwHp3AHWOrAbcaKQDN9HCbMB3g">
+<meta name="description" content="Translate text and websites, read text from images, and practice pronunciation with Nova Translate.">
+<title>Nova Translate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script defer src="/app.js"></script>
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="topbar">
+<a class="brand" href="/" aria-label="Nova Translate home"><span class="brand-mark">N</span><span>nova<span class="brand-light">translate</span></span></a>
+<div class="top-note"><span class="live-dot"></span> FOUR TOOLS. ONE LITTLE HUB.</div>
+</header>
+<main class="shell">
+<section class="hero">
+<div class="eyebrow"><span>✳</span> SAY IT ANOTHER WAY</div>
+<h1>Words travel.<br><span>We help them get there.</span></h1>
+<p class="hero-copy">A handy spot for translating a sentence, reading words from a picture, practicing a phrase, or opening a translated website.</p>
+<div class="hero-stats"><div><b>01</b><span>Text</span></div><i></i><div><b>02</b><span>Images</span></div><i></i><div><b>03</b><span>Speaking</span></div><i></i><div><b>04</b><span>Websites</span></div></div>
+</section>
+<section class="tool-grid" aria-label="Translation tools">
+<button class="tool-card sky" data-page="translate"><span class="tool-top"><span class="tool-icon">文</span><span class="tool-arrow">↗</span></span><span class="tool-title">Text translation</span><span class="tool-desc">Drop in a phrase or a whole passage.</span><span class="tool-tag">TYPE OR PASTE</span></button>
+<button class="tool-card peach" data-page="image"><span class="tool-top"><span class="tool-icon">▧</span><span class="tool-arrow">↗</span></span><span class="tool-title">Image text</span><span class="tool-desc">Pull words from a photo, then translate them.</span><span class="tool-tag">OCR + TRANSLATE</span></button>
+<button class="tool-card lime" data-page="practice"><span class="tool-top"><span class="tool-icon">◖</span><span class="tool-arrow">↗</span></span><span class="tool-title">Pronunciation practice</span><span class="tool-desc">Say the phrase and see how closely it matches.</span><span class="tool-tag">SPEAK A PHRASE</span></button>
+<button class="tool-card lilac" data-page="website"><span class="tool-top"><span class="tool-icon">◎</span><span class="tool-arrow">↗</span></span><span class="tool-title">Website translation</span><span class="tool-desc">Open a translated version of a public site.</span><span class="tool-tag">TAKES YOU TO GOOGLE</span></button>
+</section>
+<section class="workspace" id="workspace" aria-live="polite"></section>
+<footer><span>Made for curious people.</span><span>Nova Translate <b>✳</b></span></footer>
+</main>
+<div class="toast" id="toast" role="status"></div>
+</body>
+</html>
