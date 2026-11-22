@@ -4,4 +4,4 @@ Pillow
 deep-translator
 gTTS
 SpeechRecognition
-requests
+pydub
