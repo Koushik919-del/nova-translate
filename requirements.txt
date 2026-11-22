@@ -1,7 +1,0 @@
-streamlit
-pytesseract
-Pillow
-deep-translator
-gTTS
-SpeechRecognition
-pydub
