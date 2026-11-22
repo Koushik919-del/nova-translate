@@ -22,8 +22,16 @@ import requests
 st.set_page_config(page_title="Nova Translate", page_icon="🌐")
 
 # ==== DISPLAY LOGO ====
-st.markdown("<h1 style='text-align: center;'>🌐 Nova Translate</h1>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center;'>Smart assistant for OCR, translation, pronunciation, and websites.</h5>", unsafe_allow_html=True)
+st.markdown("""
+    <div class="nova-hero">
+        <div class="nova-brand">
+            <span class="nova-mark">🌐</span>
+            <span>Nova Translate</span>
+        </div>
+        <p class="nova-kicker">LANGUAGE TOOLS, ALL IN ONE PLACE</p>
+        <p class="nova-subtitle">Translate text and websites, pull words from images, and practice pronunciation.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 # ==== Language Setup ====
 all_langs = GoogleTranslator().get_supported_languages(as_dict=True)
@@ -32,54 +40,170 @@ sorted_lang_names = sorted(all_langs.keys())
 # ==== Styling ====
 st.markdown("""
     <style>
+    :root {
+        color-scheme: dark;
+        --nova-bg: #080d18;
+        --nova-panel: #101a2a;
+        --nova-line: #263b58;
+        --nova-text: #f4f7ff;
+        --nova-muted: #a2b0c6;
+        --nova-accent: #92d7ff;
+        --nova-lime: #d6f57a;
+    }
+    .stApp {
+        color: var(--nova-text);
+        background:
+            radial-gradient(ellipse at 14% 0%, rgba(37, 105, 153, .24), transparent 34%),
+            radial-gradient(ellipse at 92% 14%, rgba(91, 81, 181, .18), transparent 30%),
+            var(--nova-bg);
+    }
+    [data-testid="stAppViewContainer"] {
+        background: transparent;
+    }
+    header[data-testid="stHeader"] {
+        background: rgba(8, 13, 24, .58);
+        backdrop-filter: blur(16px);
+    }
     .block-container {
-        max-width: 920px;
-        padding-top: 5rem;
+        max-width: 1000px;
+        padding: clamp(2rem, 7vh, 5.25rem) clamp(1rem, 4vw, 2.4rem) 4rem;
     }
-
-    h1, h5 {
-        letter-spacing: 0;
+    .nova-hero {
+        text-align: center;
+        margin: 0 auto 2.1rem;
+        max-width: 760px;
     }
-
-    div.stButton > button {
+    .nova-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .8rem;
+        color: var(--nova-text);
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 800;
+        letter-spacing: -.055em;
+        line-height: 1.08;
+    }
+    .nova-mark {
+        display: inline-grid;
+        place-items: center;
+        width: clamp(3rem, 8vw, 4.25rem);
+        height: clamp(3rem, 8vw, 4.25rem);
+        border: 1px solid rgba(146, 215, 255, .32);
+        border-radius: 1.2rem;
+        background: linear-gradient(145deg, rgba(79, 164, 214, .2), rgba(121, 112, 218, .18));
+        box-shadow: 0 12px 36px rgba(29, 120, 174, .14), inset 0 1px rgba(255,255,255,.08);
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+    }
+    .nova-kicker {
+        margin: 1.2rem 0 .45rem;
+        color: var(--nova-accent);
+        font-size: .72rem;
+        font-weight: 750;
+        letter-spacing: .18em;
+    }
+    .nova-subtitle {
+        max-width: 600px;
+        margin: 0 auto;
+        color: var(--nova-muted);
+        font-size: clamp(.95rem, 2.2vw, 1.08rem);
+        line-height: 1.65;
+    }
+    h1, h2, h3 {
+        color: var(--nova-text);
+        letter-spacing: -.035em;
+    }
+    h1 {
+        font-weight: 780;
+    }
+    div[data-testid="stButton"] {
+        height: 100%;
+    }
+    div[data-testid="stButton"] > button {
         width: 100%;
-        min-height: 72px;
-        border-radius: 16px;
-        padding: 16px 22px;
-        margin: 0;
-        display: block;
-        font-size: 1.18rem;
-        font-weight: 700;
-        line-height: 1.2;
+        min-height: 92px;
+        padding: 1.15rem 1.4rem;
+        border: 1px solid var(--nova-line);
+        border-radius: 18px;
+        background: linear-gradient(145deg, rgba(20, 34, 54, .96), rgba(13, 23, 39, .96));
+        color: var(--nova-text);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .16), inset 0 1px rgba(255,255,255,.045);
+        font-size: 1.05rem;
+        font-weight: 680;
+        line-height: 1.35;
         white-space: normal;
-        word-break: normal;
-        overflow-wrap: normal;
-        border: 1px solid rgba(148, 163, 184, 0.32);
-        transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+        transition: transform .18s cubic-bezier(.2,.8,.2,1), border-color .18s, box-shadow .18s, background .18s;
     }
-
-    div.stButton > button:hover {
-        transform: translateY(-2px);
-        border-color: rgba(56, 189, 248, 0.78);
+    div[data-testid="stButton"] > button:hover {
+        transform: translateY(-3px);
+        border-color: rgba(146, 215, 255, .68);
+        background: linear-gradient(145deg, rgba(25, 47, 73, .98), rgba(16, 31, 52, .98));
+        box-shadow: 0 16px 34px rgba(0, 0, 0, .28), 0 0 0 1px rgba(146,215,255,.06);
+        color: #fff;
     }
-
-    div.stButton > button:active {
-        transform: translateY(0);
+    div[data-testid="stButton"] > button:active {
+        transform: translateY(0) scale(.985);
     }
-
+    div[data-testid="stButton"] > button:focus-visible {
+        outline: 2px solid var(--nova-accent);
+        outline-offset: 3px;
+    }
     [data-testid="column"] {
-        padding: 0.4rem;
+        padding: .45rem;
     }
-
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="input"] > div {
+        border-color: #30445f;
+        border-radius: 12px;
+        background: #101a2a;
+    }
+    input, textarea {
+        color: var(--nova-text) !important;
+    }
+    div[data-testid="stFileUploader"] section {
+        border: 1px dashed #48617e;
+        border-radius: 16px;
+        background: rgba(16, 26, 42, .72);
+    }
+    div[data-testid="stAlert"] {
+        border-radius: 13px;
+    }
+    audio {
+        width: 100%;
+        border-radius: 12px;
+    }
+    a {
+        color: #a9ddff;
+    }
     @media (max-width: 640px) {
         .block-container {
-            padding-top: 3rem;
+            padding-top: 2.5rem;
         }
-
-        div.stButton > button {
-            min-height: 64px;
-            padding: 14px 18px;
-            font-size: 1.08rem;
+        .nova-hero {
+            margin-bottom: 1.35rem;
+        }
+        .nova-brand {
+            gap: .6rem;
+        }
+        .nova-mark {
+            border-radius: .95rem;
+        }
+        div[data-testid="stButton"] > button {
+            min-height: 76px;
+            padding: 1rem;
+            font-size: 1rem;
+        }
+        [data-testid="column"] {
+            padding: .28rem;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        div[data-testid="stButton"] > button {
+            transition: none;
+        }
+        div[data-testid="stButton"] > button:hover,
+        div[data-testid="stButton"] > button:active {
+            transform: none;
         }
     }
     </style>
