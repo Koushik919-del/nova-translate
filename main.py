@@ -381,6 +381,7 @@ elif st.session_state.page == "ocr":
         st.session_state.ocr_source_id = image_id
         st.session_state.ocr_text = ""
         st.session_state.ocr_translation = None
+        st.session_state.ocr_text_editor = ""
 
     if uploaded_file:
         try:
@@ -397,6 +398,7 @@ elif st.session_state.page == "ocr":
         try:
             with st.spinner("Reading text from your image..."):
                 st.session_state.ocr_text = extract_image_text(image_bytes)
+                st.session_state.ocr_text_editor = st.session_state.ocr_text
             st.session_state.ocr_translation = None
         except pytesseract.TesseractNotFoundError:
             st.error("The text reader isn't installed right now. Please try again later.")
@@ -423,7 +425,8 @@ elif st.session_state.page == "ocr":
 
         result = st.session_state.ocr_translation
         if result and result["source"] == extracted_text and result["target"] == target_code:
-            st.text_area("Translation", value=result["text"], height=180, key="ocr_translation_output")
+            result_id = hashlib.sha256((result["source"] + result["target"] + result["text"]).encode()).hexdigest()[:12]
+            st.text_area("Translation", value=result["text"], height=180, key="ocr_translation_output_" + result_id, disabled=True)
 
     elif image_id and st.session_state.ocr_source_id == image_id and not st.session_state.ocr_text:
         st.info("Choose “Read text from image” to start.")
@@ -468,7 +471,8 @@ elif st.session_state.page == "translate":
 
     result = st.session_state.text_translation
     if result and result["source"] == source_text and result["target"] == target_code:
-        st.text_area("Translation", value=result["text"], height=180, key="text_translation_output")
+        result_id = hashlib.sha256((result["source"] + result["target"] + result["text"]).encode()).hexdigest()[:12]
+        st.text_area("Translation", value=result["text"], height=180, key="text_translation_output_" + result_id, disabled=True)
         if result["audio"]:
             st.audio(result["audio"], format="audio/mp3")
         elif result["audio_message"]:
